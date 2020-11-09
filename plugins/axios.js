@@ -21,11 +21,10 @@ export default function ({ $axios, redirect, store, app }) {
     if(authToken) {
       req.headers.common.Authorization = `Bearer ${authToken.accessToken}`
     }
-    console.log(req);
   })
 
   $axios.onResponse((res) => {
-    console.log(1111111, res);
+    store.commit('setLoading', false);
     return res.data
   })
 

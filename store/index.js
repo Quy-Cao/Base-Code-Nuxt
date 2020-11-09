@@ -35,17 +35,9 @@ const store = () => {
         let auth = null;
         let checkCookie = req.headers.cookie.split("auth=")[1];
         if (checkCookie) {
-          auth = cookieparser.JSONCookies(checkCookie)
-          // console.log('parsed',typeof parsed);
-          // try {
-          //   auth = JSON.parse(parsed)
-          //   console.log(auth);
-          // } catch (err) {
-          //   // No valid cookie found
-          // }
+          auth = cookieparser.JSONCookies(checkCookie);
         }
         commit('setAuth', auth)
-        console.log(state);
       }
     }
   })
