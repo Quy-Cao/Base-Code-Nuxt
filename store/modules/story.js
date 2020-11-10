@@ -15,9 +15,9 @@ export default {
   actions: {
     async getListStory({ commit }) {
       const resApi = await this.$axios.$get('home');
-      if(resApi.type === 'success') {
-        commit('setListStory', resApi.data)
+      if(resApi.message === 'succes') {
+        commit('setListStory', resApi.story_news)
       }
-    }
+    },
   }
 }

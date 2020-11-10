@@ -1,5 +1,5 @@
 export default {
   testLanguage: {
-    languages: 'English',
+    languages: '英語',
   }
 }

@@ -1,62 +1,63 @@
 <template>
   <div>
-    <Nuxt />
+    <template v-if="isLoading">
+      <div class="fade-loading h-100 w-100"></div>
+      <div class="loading-box">
+          <img src="../assets/images/Spinner-1s-200px (2).svg" alt="">
+      </div>
+    </template>
+    <div>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nuxt-link class="navbar-brand" to="/">Nuxtjs</nuxt-link>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <nuxt-link to="/home" class="nav-link">Home</nuxt-link>
+            </li>
+          </ul>
+          <select @change="handleChangeLangugage" class="btn btn-primary mr-3">
+            <option v-for="lang in $i18n.locales" :key="lang.code" :value="lang.code">{{ lang.name }}</option>
+          </select>
+          <button class="btn btn-success my-2 my-sm-0 mr-3" @click="handleClick">Logout</button>
+        </div>
+      </nav>
+    </div>
+    <div class="container">
+      <Nuxt />
+    </div>
   </div>
 </template>
 
-<style>
-html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
+<script>
+  const Cookies = process.client ? require('js-cookie') : undefined;
+  import { mapState } from 'vuex';
+  export default {
+    data() {
+      return {
+        langs: ['en', 'ja']
+      }
+    },
+    computed: {
+      ...mapState({
+        isLoading: state => state.isLoading,
+      })
+    },
+    methods: {
+      handleClick() {
+        setTimeout(() => {
+          this.$store.commit("setAuth");
+          Cookies.remove('auth');
+          this.$router.push("/login");
+        }, 1000);
+      },
+      handleChangeLangugage(e) {
+        this.$i18n.setLocale(e.target.value);
+      }
+    }
+  }
+</script>
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
-</style>

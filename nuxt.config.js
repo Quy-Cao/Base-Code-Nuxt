@@ -1,6 +1,8 @@
 import webpack from 'webpack';
 
 export default {
+  // target: 'static', // default is 'server'
+  ssr: true,
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'base-code',
@@ -42,7 +44,9 @@ export default {
       {
         lazy: true,
         locales: [
-          { code: 'en', iso: 'en-US', file: 'en.js' },
+          { name: 'English', code: 'en', file: 'en.js' },
+          { name: 'Japan', code: 'ja', file: 'ja.js' },
+          { name: 'China', code: 'cn', file: 'cn.js' },
         ],
         defaultLocale: 'en',
         langDir: 'languages/',

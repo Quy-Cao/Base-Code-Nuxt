@@ -1,30 +1,41 @@
 <template>
-  <div class="container">
+  <div>
     <div>
-      <Logo />
-      <h1 class="title">
-        base-code
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-        <!-- <button @click="handleClick">Call API</button> -->
-        <button @click="testStore"> Click </button>
+      <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb pl-0 mb-0">
+          <li class="breadcrumb-item"><nuxt-link to="/">Trang chủ</nuxt-link></li>
+        </ol>
+      </nav>
+    </div>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="https://playful-archduke.glitch.me/img/slide2.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="https://playful-archduke.glitch.me/img/slide2.jpg" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="https://playful-archduke.glitch.me/img/slide3.jpg" alt="Third slide">
+        </div>
       </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <div class="mt-5">
+      <h1 class="text-center">Mutil Languages</h1>
+      <h2>Languages: {{ $t('testLanguage.languages')}}</h2>
     </div>
   </div>
 </template>
@@ -32,31 +43,7 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 export default {
-  middleware: "unAuthenticated",
-  data() {
-    return {
-    }
-  },
-  
-  async created() {
-    await this.getListStory();
-  },
-
-  computed: {
-    ...mapState({
-      listStory: state => state.story.listStory
-    })
-  },
-  
-  methods: {
-    ...mapActions({
-      getListStory: 'story/getListStory'
-    }),
-    testStore() {
-      // this.$store.commit('setAuth', 'ok auth');
-      console.log(this.$store.state.auth);
-    }
-  }
+  middleware: "authenticated",
 }
 </script>
 

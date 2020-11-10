@@ -1,33 +1,37 @@
 <template>
   <div class="container">
-    <h1>Sign in to access the secret page</h1>
-    <div>
-      <label for="email">
-        <input id="email" type="email" value="test" />
-      </label>
-      <label for="password">
-        <input id="password" type="password" value="test" />
-      </label>
-      <button @click="postLogin">
-        login
-      </button>
-      <p>The credentials are not verified for the example purpose.</p>
-    </div>
+    <h1>Sign in</h1>
+    <form>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="quycao@gmail.com">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" value="test">
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div>
+    </form>
+    <button class="btn btn-primary" @click="postLogin">Submit</button>
   </div>
 </template>
 
 <script>
-const Cookie = process.client ? require('js-cookie') : undefined
+const Cookies = process.client ? require('js-cookie') : undefined
 export default {
-  middleware: "authenticated",
+  middleware: "notAuthenticated",
   methods: {
-    postLogin(e) {
+    postLogin() {
       setTimeout(() => {
         const auth = {
           accessToken: "someStringGotFromApiServiceWithAjax"
         };
         this.$store.commit("setAuth", auth);
-        Cookie.set('auth', JSON.stringify(auth.accessToken));
+        Cookies.set('auth', JSON.stringify(auth.accessToken));
         this.$router.push("/");
       }, 1000);
       

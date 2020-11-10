@@ -4,3 +4,26 @@
 
 @import "./reset";
 @import "./_custom.scss";
+
+.fade-loading {
+  position: absolute;
+  top: 0;
+  z-index: 1035;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  opacity: 0.9;
+}
+.loading-box {
+  position: fixed;
+  top: 33%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 1040;
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+}
